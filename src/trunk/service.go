@@ -42,7 +42,7 @@ func RegisterProcess(name, path string) error {
 	}
 	//see if the path is correct(we can create)
 	//!!!dont use open ! because open is readonly!!!
-	if _, err := os.Open(path); err != nil && os.IsExist(err) {
+	if _, err := os.Open(path); err == nil {
 		return fmt.Errorf("[regsiterProcess] config file already exists for this process")
 	}
 	//create file
