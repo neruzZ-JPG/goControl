@@ -35,7 +35,7 @@ func showWelcome() {
 func showProcesses() {
 	fmt.Println("showing processs~~~")
 	QueryProcesses()
-	fmt.Println("---------------------------------------")
+	dividend()
 	Homepage()
 }
 
@@ -47,6 +47,7 @@ func registerProcessView() {
 	if err := RegisterProcess(name, path); err != nil {
 		fmt.Println(err)
 	}
+	dividend()
 	Homepage()
 }
 
@@ -72,11 +73,16 @@ func cancelView() {
 			fmt.Println(err)
 		}
 	}
+	dividend()
 	Homepage()
 }
 
 func inputBox() {
 	fmt.Print("> ")
+}
+
+func dividend() {
+	fmt.Println("--------------------------------")
 }
 
 func selectProcessView() {
@@ -98,6 +104,7 @@ func selectProcessView() {
 	if reply == "y" {
 		changeConfigView(name, configMap)
 	}
+	dividend()
 	Homepage()
 }
 
@@ -107,5 +114,8 @@ func changeConfigView(name string, configMap map[string]string) {
 	fmt.Println("hint : format as 'key value'")
 	inputBox()
 	fmt.Scanf("%s %s", &key, &value)
-	changeConfig(name, configMap, key, value)
+	if err := changeConfig(name, configMap, key, value); err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("change config success")
 }
